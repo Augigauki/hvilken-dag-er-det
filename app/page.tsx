@@ -1,95 +1,67 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import styles from './page.module.css';
+import computus from './calcEaster';
+import {addDays, addHours} from './addDays';
+import fromToday from './fromToday';
+import DayViewer from './(components)/dayViewer';
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+const Page = ({}) => {
+	let currDate = new Date();
+	currDate = addHours(currDate, 2);
+	let christmas = new Date(`24 Dec ${currDate.getFullYear()} 00:00:00`);
+	if (currDate < christmas) {
+		christmas = new Date(`24 Dec ${currDate.getFullYear() - 1} 00:00:00`);
+	}
+	let newYears = new Date(`31 Dec ${currDate.getFullYear()} 00:00:00`);
+	if(currDate < newYears){
+		newYears = new Date(`31 Dec ${currDate.getFullYear()-1} 00:00:00`)
+	}
+	let easter = computus(currDate.getFullYear());
+	if (currDate < easter){
+		easter = computus(currDate.getFullYear()-1);
+	}
+	
+	easter = addDays(easter, 6);
+	let pentecost = easter;
+	pentecost = addDays(pentecost, 49);
+	if(currDate < pentecost){
+		let prevEaster = computus(currDate.getFullYear()-1);
+		prevEaster = addDays(prevEaster, 6);
+		pentecost = addDays(prevEaster, 49);
+	}
+	
+	const daysSinceChristmas = fromToday(currDate, christmas);
+	const daysSinceNewYears = fromToday(currDate, newYears);
+	const daysSinceEaster = fromToday(currDate, easter);
+	const daysSincePentecost = fromToday(currDate, pentecost);
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+	return (
+		<div className={styles.page}>
+			<DayViewer
+				days={daysSinceChristmas}
+				day={'juledag'}
+			>
+				Juledag
+			</DayViewer>
+			<DayViewer
+				days={daysSinceNewYears}
+				day={'nyttårsdag'}
+			>
+				Nyttårsdag
+			</DayViewer>
+			<DayViewer
+				days={daysSinceEaster}
+				day={'påskedag'}
+			>
+				Påskedag
+			</DayViewer>
+			<DayViewer
+				days={daysSincePentecost}
+				day={'pinsedag'}
+			>
+				Pinsedag
+			</DayViewer>
+		</div>
+	);
+};
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
-}
+export default Page;

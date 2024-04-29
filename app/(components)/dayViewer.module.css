@@ -1,0 +1,42 @@
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+	align-items: flex-start;
+}
+
+.tag {
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 1em;
+}
+
+.heading {
+	font-size: 3em;
+	line-height: 1.2;
+}
+
+.numbers {
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
+	font-size: 6em;
+    line-height: 1;
+	text-align: right;
+	font-family: 'Digital Dismay';
+	width: 4ch;
+}
+
+.days {
+	color: #bc4749;
+	position: relative;
+	z-index: 1;
+}
+
+.zeroes {
+	position: absolute;
+	right: 0;
+	color: #43291f;
+    color: #bc4749;
+	opacity: 20%;
+}
