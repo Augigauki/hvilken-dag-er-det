@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './page.module.css';
 import computus from './calcEaster';
 import {addDays, addHours} from './addDays';
