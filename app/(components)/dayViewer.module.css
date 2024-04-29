@@ -25,12 +25,14 @@
 	text-align: right;
 	font-family: 'Digital Dismay';
 	width: 4ch;
+	user-select: none;
 }
 
 .days {
 	color: #bc4749;
 	position: relative;
 	z-index: 1;
+	user-select: none;
 }
 
 .zeroes {
@@ -39,4 +41,5 @@
 	color: #43291f;
     color: #bc4749;
 	opacity: 20%;
+	user-select: none;
 }
