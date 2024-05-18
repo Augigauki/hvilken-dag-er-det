@@ -21,16 +21,16 @@ const Page = ({}) => {
 	if (currDate < easter){
 		easter = computus(currDate.getFullYear()-1);
 	}
-	
+	console.log("Todays date:")
+	console.log(currDate);
 	easter = addDays(easter, 6);
 	let pentecost = easter;
-	pentecost = addDays(pentecost, 49);
+	pentecost = addDays(pentecost, 50);
 	if(currDate < pentecost){
 		let prevEaster = computus(currDate.getFullYear()-1);
 		prevEaster = addDays(prevEaster, 6);
-		pentecost = addDays(prevEaster, 49);
+		pentecost = addDays(prevEaster, 50);
 	}
-	
 	const daysSinceChristmas = fromToday(currDate, christmas);
 	const daysSinceNewYears = fromToday(currDate, newYears);
 	const daysSinceEaster = fromToday(currDate, easter);
