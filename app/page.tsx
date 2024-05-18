@@ -8,7 +8,7 @@ import DayViewer from './(components)/dayViewer';
 
 const Page = ({}) => {
 	let currDate = new Date();
-	currDate = addHours(currDate, 2);
+	//currDate = addHours(currDate, 2);
 	let christmas = new Date(`24 Dec ${currDate.getFullYear()} 00:00:00`);
 	if (currDate < christmas) {
 		christmas = new Date(`24 Dec ${currDate.getFullYear() - 1} 00:00:00`);
@@ -22,7 +22,7 @@ const Page = ({}) => {
 		easter = computus(currDate.getFullYear()-1);
 	}
 	console.log("Todays date:")
-	console.log(currDate);
+	console.log(currDate.toLocaleString());
 	easter = addDays(easter, 6);
 	let pentecost = easter;
 	pentecost = addDays(pentecost, 50);
