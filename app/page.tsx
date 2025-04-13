@@ -18,12 +18,10 @@ const Page = ({}) => {
 		newYears = new Date(`31 Dec ${currDate.getFullYear()-1} 00:00:00`)
 	}
 	let easter = computus(currDate.getFullYear());
+	easter = addDays(easter, 6);
 	if (currDate < easter){
 		easter = computus(currDate.getFullYear()-1);
 	}
-	console.log("Todays date:")
-	console.log(currDate.toLocaleString());
-	easter = addDays(easter, 6);
 	let pentecost = easter;
 	pentecost = addDays(pentecost, 48);
 	if(currDate < pentecost){
