@@ -8,7 +8,7 @@ const DayViewer = ({days, day, children}: {days: number, day: string, children: 
 					Det er <span className={styles.days}>{days}</span> {day}
 				</h1> */}
                 <div className={styles.numbers}>
-                    <p className={styles.zeroes}>0000</p>
+                    <p className={styles.zeroes}>000</p>
                     <p className={styles.days}>{days}</p>
                 </div>
 				{/* <h3>Kos deg!</h3> */}

@@ -3,6 +3,16 @@
 	src: url('../public/fonts/Digital Dismay.otf') format('opentype')
 }
 
+:root{
+  --monday: #121a73;
+  --tuesday: #75ddef;
+  --wednesday: #146625;
+  --thursday: #981010;
+  --friday: #d97116;
+  --saturday: #353535;
+  --sunday: #411111;
+}
+
 
 body{
   background-color: #f2e8cf;
