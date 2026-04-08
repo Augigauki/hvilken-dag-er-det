@@ -20,20 +20,24 @@ const Page = ({}) => {
 		newYears = new Date(`31 Dec ${currDate.getFullYear() - 1} 00:00:00`);
 	}
 	let easter = computus(currDate.getFullYear());
-	easter = addDays(easter, 6);
+	const daysUntilSunday = easter.getDay() === 0 ? 7 : 7 - easter.getDay();
+	easter = addDays(easter, daysUntilSunday);
 	if (currDate < easter) {
-		easter = computus(currDate.getFullYear() - 1);
+		const prevEaster = computus(currDate.getFullYear() - 1);
+		const prevDaysUntilSunday = prevEaster.getDay() === 0 ? 7 : 7 - prevEaster.getDay();
+		easter = addDays(prevEaster, prevDaysUntilSunday);
 	}
 	let pentecost = easter;
 	pentecost = addDays(pentecost, 48);
 	if (currDate < pentecost) {
 		let prevEaster = computus(currDate.getFullYear() - 1);
-		prevEaster = addDays(prevEaster, 6);
+		const prevDaysUntilSunday = prevEaster.getDay() === 0 ? 7 : 7 - prevEaster.getDay();
+		prevEaster = addDays(prevEaster, prevDaysUntilSunday);
 		pentecost = addDays(prevEaster, 48);
 	}
 	const daysSinceChristmas = fromToday(currDate, christmas);
 	const daysSinceNewYears = fromToday(currDate, newYears);
-	const daysSinceEaster = fromToday(currDate, easter);
+	const daysSinceEaster = fromToday(currDate, easter) + 1;
 	const daysSincePentecost = fromToday(currDate, pentecost);
 
 	return (
